@@ -1,0 +1,149 @@
+% this style was created by Horea Christian and is basted on the ETH Zürich corporate design color palette https://www.ethz.ch/services/en/service/communication/corporate-design/colour.html
+\ProvidesPackage{beamerthemeZH}
+
+% \usepackage{graphics}
+\usepackage{graphicx}
+\newcommand{\vcenteredinclude}[1]{\begingroup
+\setbox0=\hbox{\includegraphics[width=.8\textwidth, height=.06\paperheight, keepaspectratio]{#1}}%
+\parbox{\wd0}{\box0}\endgroup}
+
+
+\usepackage{calc}
+\newlength{\mylength}
+
+\mode<presentation>
+
+\definecolor{ETH1}{RGB}{31,64,122}
+\definecolor{ETH3}{RGB}{0,105,180}
+\definecolor{ETH10}{RGB}{255,190,30}
+\definecolor{tlg}{RGB}{230,230,230}
+\definecolor{dtured}{RGB}{153,0,0}
+\definecolor{dtugrey}{RGB}{175,175,175}
+\definecolor{dtublk}{RGB}{153,153,153}
+\definecolor{dtugreycmyk}{cmyk}{0,0,0,0.56}
+\definecolor{dturedcmyk}{cmyk}{0,0.91,0.72,0.23}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%It seems many of the following entries do not control any visible Behaviour. All such entries are
+%set to red, so that they are easy to spot if they ever become visible
+
+\setbeamercolor{headline}{fg=red,bg=ETH3!0} % This is the recommended color for Specialist community usage: change to ETH1 for general communication
+\setbeamercolor{footline}{fg=red, bg=red}
+\setbeamerfont{footline}{size=\large,series=\bf}
+\setbeamercolor{separation line}{bg=dturedcmyk}
+\setbeamercolor{title in headline}{fg=dturedcmyk}
+\setbeamercolor{author in headline}{fg=black}
+\setbeamercolor{institute in headline}{fg=black}
+
+\setbeamercolor{framesubtitle}{fg=red, bg=ta2gray}
+\setbeamercolor{author in head/foot}{fg=dtublk, bg=ETH3!0}
+\setbeamercolor{title in head/foot}{fg=dtublk, bg=red}
+
+\setbeamercolor*{normal text}{fg=black, bg=tlg}
+\setbeamercolor*{block body}{fg=black, bg=white}
+\setbeamercolor*{block title}{fg=dturedcmyk,bg=dtugreycmyk!50}
+\setbeamerfont{block title}{size=\large, series=\bf, family=\rm}%=
+\setbeamercolor{upper separation line head}{fg=red}
+
+\setbeamercolor*{example body}{fg=red,bg=red}
+\setbeamercolor*{example text}{fg=red,bg=red}
+\setbeamercolor*{example title}{bg=red,fg=red}
+
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{structure}{fg=black}
+
+\setbeamertemplate{itemize items}{\color{ETH10}$\blacktriangleright$}
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+\newenvironment<>{myblock}[1]{%
+	\begin{actionenv}#2%
+	\def\insertblocktitle{\centering#1}%
+	\par%
+	\usebeamertemplate{block begin}\leftskip=14pt\rightskip=14pt\vspace{10pt}}
+	{\par\vspace{1em}\usebeamertemplate{block end}
+	\end{actionenv}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% !!! This environment can't both have nice margins AND display the contained text as justified:
+% We preferentially use the above but keep this one just-in-case
+\setbeamertemplate{block begin}{
+	\setlength{\mylength}{\textwidth+2ex}%
+	\vskip2ex
+	\begin{beamercolorbox}[ht=2.8ex,dp=1.ex, wd=\mylength, center,rounded=false,shadow=false,leftskip=1cm,colsep*=1ex]{block title}%
+		\usebeamerfont*{block title}\centering \insertblocktitle
+	\end{beamercolorbox}\vskip-9pt%
+	{\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5ex}}%
+	\usebeamerfont{block body}%
+	\begin{beamercolorbox}[rounded=false,shadow=false,center,wd=\textwidth,]{block body}%
+		\ifbeamercolorempty[bg]{block body}\vbox{}%
+		\begin{minipage}{0.96\textwidth}\vbox{}%
+		\justify
+		}
+\setbeamertemplate{block end}{
+	\end{minipage}
+	\end{beamercolorbox}
+	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{
+	\leavevmode
+	\begin{beamercolorbox}[wd=\paperwidth]{headline}
+		\vspace{2ex}\\
+		\begin{columns}[c]
+			\begin{column}{.2\paperwidth}
+				\begin{center}
+					\vspace*{6cm}\includegraphics[width=.8\textwidth, height=.5\textwidth,keepaspectratio]{img/tex_dtu_space_b_uk}
+				\end{center}
+			\end{column}
+			\begin{column}{.6\paperwidth}
+				\raggedleft
+				\usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[1ex]}
+				\usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[1ex]}
+				\usebeamercolor{institute in headline}{\color{fg}\small{\insertinstitute}\\[1ex]}
+			\end{column}
+			\begin{column}{.2\paperwidth}
+				\begin{center}
+					\includegraphics[width=.8\textwidth, height=.5\textwidth, keepaspectratio]{img/tex_dtu_logo}
+				\end{center}
+			\end{column}
+			\begin{column}{.0\paperwidth}
+			\end{column}
+		\end{columns}
+		\vspace{2ex}\\
+	\end{beamercolorbox}
+
+ 	\begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+		\rule{0pt}{2pt}
+	\end{beamercolorbox}
+	\vskip-2cm
+	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{footline}{
+	\begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
+		\rule{0pt}{2pt}
+	\end{beamercolorbox}
+	\leavevmode%
+	\begin{beamercolorbox}[ht=4ex,leftskip=1cm,rightskip=1cm]{author in head/foot}%
+		\href{http://www.space.dtu.dk}{http://www.space.dtu.dk}
+		\hfill
+		\today
+		\hfill
+		\href{mailto:xiahaa@space.dtu.dk}{xiahaa@space.dtu.dk}
+		\vskip1ex
+	\end{beamercolorbox}
+	\vskip0pt%
+	\begin{beamercolorbox}[wd=\paperwidth]{lower separation line foot}
+		\rule{0pt}{2pt}
+	\end{beamercolorbox}
+	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display a grid to help align images ... and it looks nice with this color scheme
+% \beamertemplategridbackground[1cm]
+
+%Some beamer customizations:
+\setbeamertemplate{bibliography item}[text]
+\setbeamertemplate{caption}[numbered]{}% Number float-like environments
+
+\mode<all>
