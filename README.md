@@ -2,4 +2,4 @@
 
 customized beamer poster using DTU logos and DTU colors.
 
-Thanks for pioneering work by [beamer poster](https://github.com/deselaers/latex-beamerposter).
+Thanks for the pioneering work by [beamer poster](https://github.com/deselaers/latex-beamerposter).
