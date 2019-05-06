@@ -340,16 +340,19 @@
 \headerbox{Implementation}{name=lowrestracking,column=1,span=1,below=speed,below=contribution}{
 \paragraph{Conditioning} $\mathbf{Au=b}$ may be ill-posed. To deal with:
 \begin{itemize}
+\setlength\itemsep{0.1em}
 \item check the harmonic mean: $\frac{\text{det}(\mathbf{A})}{\text{tr}(\mathbf{A})} > \tau$.
 \item check the minimum eigenvalue: $\lambda_{min}> \tau$.
 \end{itemize}
 \paragraph{Gradient Kernel} To compute $I_x, I_y$, different kernels are applied:
 \begin{itemize}
+\setlength\itemsep{0.1em}
 \item $[-1,0,1]$.
 \item Derivative of Gaussian.
 \end{itemize}
 \paragraph{Weighting Kernel} To sum up the contributions from neighbouring pixels, the following kernels are applied:
 \begin{itemize}
+\setlength\itemsep{0.1em}
 \item Box filter.
 \item Gaussian Kernel.
 \end{itemize}
@@ -360,7 +363,7 @@
 \textbf{Coarse-to-Fine Optical Flow Estimation}.
 }
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   \headerbox{Results}{name=speed,column=2,row=0,span=2}{
+   \headerbox{Flow Estimation}{name=speed,column=2,row=0,span=2}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \begin{tabular}{c@{\hspace{0.05em}}c@{\hspace{0.2em}}c@{\hspace{0.1em}}c@{\hspace{0.2em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c}
    \multicolumn{6}{c}{\smaller Army} &\\[-0.2em]
@@ -403,30 +406,14 @@
 	\includegraphics[width=0.16\linewidth]{figures/Wooden/Wooden_HS_quiver.png}&
 	\includegraphics[width=0.16\linewidth]{figures/Wooden/Wooden_HS_rgb.png}\\[-0.1em]
 
-   \smaller Image $1$ & \smaller Image $2$ & \smaller LK Quiver Plot & \smaller LK Flow Image & \smaller HS Quiver Plot & \smaller HS Flow Image
+   \smaller \textbf{Image $1$} & \smaller \textbf{Image $2$} & \smaller \textbf{LK Quiver Plot} & \smaller \textbf{LK Flow Image} & \smaller \textbf{HS Quiver Plot} & \smaller \textbf{HS Flow Image}
    \end{tabular}
    }
-%
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   \headerbox{Methods Compared}{name=methods,column=0,below=algorithm}{
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   \begin{tabular}{rllllll}
-%     Method                              & Hessian               &                                        & Gradient        &                                  & Speed      & Capture Range\\
-%     \midrule
-% \CoDe{} (this paper)                & Not used              &                                        & True:           & $\tilde{J}_{\qq_0}^T\e{\qq_0}$   & Fast       & Large  \\[0.1em]
-% \LinCoDe{} (this paper)             & Not used              &                                        & Linear Approx:  & $\bar{J}^T\e{\qq_0}$             & Very Fast  & Medium \\[0.1em]
-% \CoLiNe{}~\cite{burkhardt86:motion} & Constant Approx.:     & $\bar{J}^T\bar{J}$                     & True:           & $\tilde{J}_{\qq_0}^T\e{\qq_0}$   & Fast       & Medium \\[0.1em]
-% \ICIA{}~\cite{matthews:aamr}        & Constant Approx.:     & $\bar{J}^T\bar{J}$                     & Linear Approx:  & $\bar{J}^T\e{\qq_0}$             & Very Fast  & Small  \\[0.1em]
-% \CoNe{}~\cite{matthews:kanade20}    & Gauss-Newton Approx.: & $\tilde{J}_{\qq_0}^T\tilde{J}_{\qq_0}$ & True:           & $\tilde{J}_{\qq_0}^T\e{\qq_0}$   & Slow       & Large  
-%   \end{tabular}
-%   The methods introduced in this paper are Hessian-free gradient descent methods.
-%  }
 %
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    \headerbox{References}{name=references,column=1,above=bottom}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
      \smaller
-     
      \bibliographystyle{ieee}
      \renewcommand{\section}[2]{\vskip 0.05em}
        \begin{thebibliography}{99}\itemsep=-0.01em
@@ -437,77 +424,26 @@
  	   Horn B K P, Schunck B G. 
  	   \newblock Determining optical flow[J].
  	   \newblock  Artificial intelligence, 1981. 
+ 	   \bibitem{flow:ln}
+ 	   Anders~D~B, Vedrana~A~D.\newblock Advanced Image Analysis.\newblock Lecture Note.
+ 	   \bibitem{flow:sa}
+ 	   Richard Szeliski.\newblock Computer vision: algorithms and applications.\newblock Springer Science \& Business Media, 2010
        \end{thebibliography}
    }
-
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   \headerbox{Training + Testing Data}{name=data,column=0,above=references,below=abstract}{
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   \includegraphics[width=0.2\linewidth]{018_4_2_masked}%
-%   \includegraphics[width=0.2\linewidth]{328_2_1_masked}%
-%   \includegraphics[width=0.2\linewidth]{319_2_1_masked}%
-%   \includegraphics[width=0.2\linewidth]{027_4_2_masked}%
-%   \includegraphics[width=0.2\linewidth]{020_1_1_masked}
-%   \includegraphics[width=0.2\linewidth]{12_2f_masked}%
-%   \includegraphics[width=0.2\linewidth]{21_3m_masked}%
-%   \includegraphics[width=0.2\linewidth]{09_6m_masked}%
-%   \includegraphics[width=0.2\linewidth]{33_4m_masked}%
-%   %\includegraphics[width=0.2\linewidth]{22_3f_masked}
-%   $\dots$\\
-%   The model was trained from 456 images from the IMM and XM2VTS datasets using
-%   120 landmarks. Get the landmarks, model, and source code at:\\
-%   \mbox{\url{www.cs.unibas.ch/personen/amberg_brian/aam/}}
-%   }
-
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-   \headerbox{Tracking 5000 frames with a general model}{name=tracking,column=2,span=2,below=speed,above=bottom}{
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{tabular}{c@{\hspace{0.05em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c}
-%   \multicolumn{5}{c}{\smaller \ICIA{} with $\VLins$} &
-%   \multicolumn{5}{c}{\smaller \ICIA{} with $\VLins$ + Regularisation}\\[-0.2em]
-%   \includegraphics[width=0.095\linewidth]{track_frame_00010_01}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00050_01}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00450_01}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_02000_01}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_04999_01}&
-%   %
-%   \includegraphics[width=0.095\linewidth]{track_frame_00010_02}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00050_02}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00450_02}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_02000_02}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_04999_02}\\[-0.1em]
-%   %
-%   \multicolumn{5}{c}{\smaller \LinCoDe{}} &
-%   \multicolumn{5}{c}{\smaller \LinCoDe{} + Regularisation}\\[-0.2em]
-%   \includegraphics[width=0.095\linewidth]{track_frame_00010_03}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00050_03}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00450_03}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_02000_03}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_04999_03}&
-%   %
-%   \includegraphics[width=0.095\linewidth]{track_frame_00010_04}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00050_04}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00450_04}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_02000_04}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_04999_04}\\[-0.1em]
-%   %
-%   \multicolumn{5}{c}{\smaller \CoDe{}} &
-%   \multicolumn{5}{c}{\smaller \CoDe{} + Regularisation}\\[-0.2em]
-%   \includegraphics[width=0.095\linewidth]{track_frame_00010_05}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00050_05}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00450_05}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_02000_05}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_04999_05}&
-%   %
-%   \includegraphics[width=0.095\linewidth]{track_frame_00010_06}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00050_06}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_00450_06}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_02000_06}&
-%   \includegraphics[width=0.095\linewidth]{track_frame_04999_06}\\[-0.5em]
-%   \smaller Frame 10 & \smaller Frame 50 & \smaller Frame 450 & \smaller Frame 2000 & \smaller Frame 5000 &
-%   \smaller Frame 10 & \smaller Frame 50 & \smaller Frame 450 & \smaller Frame 2000 & \smaller Frame 5000
-%   \end{tabular}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \headerbox{Analysis}{name=tracking,column=2,span=2,below=speed,above=bottom}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{tabular}{c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c}
+   \multicolumn{1}{c}{
+   	\includegraphics[width=0.16\linewidth]{figures/runtime.png}}
+   &
+   \includegraphics[width=0.16\linewidth]{figures/Yosemite/Yosemite_HS_rgb.png}&
+   \includegraphics[width=0.16\linewidth]{figures/Yosemite/Yosemite_HS_rgb_101_box.png}&
+   \includegraphics[width=0.16\linewidth]{figures/Yosemite/Yosemite_HS_rgb_101_gau.png}&
+   \includegraphics[width=0.16\linewidth]{figures/Yosemite/Yosemite_HS_rgb_gau_box.png}&
+   \includegraphics[width=0.16\linewidth]{figures/Yosemite/Yosemite_HS_rgb_no_pyr_30.png} \\[-0.1em]
+   \smaller \textbf{Runtime} & \smaller \textbf{G+G} & \smaller \textbf{S+B} & \smaller \textbf{S+G} & \smaller \textbf{G+B}   & \smaller \textbf{No Pyr: 30 Iter}   
+\end{tabular}
 % }
 %   \vspace{-1.2em}
 %   \begin{multicols}{2}
@@ -527,39 +463,6 @@
 %   different subjects.
 %   \end{multicols}
    }
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   \headerbox{Low Res Tracking}{name=lowrestracking,column=1,span=1,below=speed,above=bottom}{
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{tabular}{@{}c@{}c@{}c@{}c@{}c@{}}
-%  \multicolumn{5}{c}{\smaller \ICIA{} with $\VLins$}\\[-0.2em]
-%  \includegraphics[width=0.2\linewidth]{bush_00010_02}&
-%  \includegraphics[width=0.2\linewidth]{bush_00100_02}&
-%  \includegraphics[width=0.2\linewidth]{bush_00200_02}&
-%  \includegraphics[width=0.2\linewidth]{bush_00300_02}&
-%  \includegraphics[width=0.2\linewidth]{bush_00400_02}\\[-0.1em]
-%  \multicolumn{5}{c}{\smaller \LinCoDe{}}\\[-0.2em]
-%  \includegraphics[width=0.2\linewidth]{bush_00010_05}&
-%  \includegraphics[width=0.2\linewidth]{bush_00100_05}&
-%  \includegraphics[width=0.2\linewidth]{bush_00200_05}&
-%  \includegraphics[width=0.2\linewidth]{bush_00300_05}&
-%  \includegraphics[width=0.2\linewidth]{bush_00400_05}\\[-0.1em]
-%  \multicolumn{5}{c}{\smaller \CoDe{}}\\[-0.2em]
-%  \includegraphics[width=0.2\linewidth]{bush_00010_08}&
-%  \includegraphics[width=0.2\linewidth]{bush_00100_08}&
-%  \includegraphics[width=0.2\linewidth]{bush_00200_08}&
-%  \includegraphics[width=0.2\linewidth]{bush_00300_08}&
-%  \includegraphics[width=0.2\linewidth]{bush_00400_08}\\[-0.5em]
-%  \smaller Frame 10 & \smaller Frame 100 & \smaller Frame 200 & \smaller Frame 300 & \smaller Frame 400 
-%  \end{tabular}
-
-%  \vspace{1.25em}
-%  \textbf{Tracking a low resolution video with large head motions
-%  succeeds with \CoDe{}, where \ICIA{} fails.}\\ All methods used the orthonormal
-%  incremental warp, and relatively strong regularisation.  \ICIA{} starts to
-%  drift in the early frames, while~\CoDe{} tracks the full sequence. The
-%  approximate gradient method \LinCoDe{} also suceeds, but looses
-%  track of the details for about 100 frames.
-%   }
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{poster}%
 %
