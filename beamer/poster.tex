@@ -68,13 +68,18 @@ System (GPS). Nonetheless, its performance will deteriorate dramatically in clus
 					We propose an approach to build a map of fiducial
 markers based on manifold optimization and then extend the
 fiducial map for pose estimation. Process pose fusion and optimization directly on manifold to avoid numeric problems, singularities and maintain smoothness. The fiducial map based pose estimation system is cost-effective, lightweight and can work both indoor and outdoor.
-\end{myblock}
-\begin{myblock}{Preliminaries}
-\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
-\item $\bold{G}$: the global coordinate system. 
-\item $\bold{M}$: the local coordinate system of fiducial marker. The local coordinate system of $i^{th}$ marker is represented by $\bold{M}_{i}$. 
-\item $\bold{C}$: the camera coordinate system. Similarly, $\bold{C}_{k}$ denotes the camera coordinate system of the $k^{th}$ image. 
-\end{enumerate} 
+					\end{myblock}
+					
+\begin{block}{Preliminaries}
+	%\begin{itemize}%[label=,labelindent=\parindent,leftmargin=*]
+	%\item 
+	$\bold{G}$: the global coordinate system. 
+	%\item 
+	$\bold{M}$: the local coordinate system of fiducial marker. The local 	coordinate system of $i^{th}$ marker is represented by $\bold{M}_{i}$. 	
+	%\item 
+	$\bold{C}$: the camera coordinate system. Similarly, $\bold{C}_{k}$ denotes the camera coordinate system of the $k^{th}$ image. 
+	%\end{itemize} 
+%%\end{myblock}
 
 $\mathbb{SO}(3)$ is defined with~\eqref{eq:SO3definition}:
 \begin{equation}
@@ -93,7 +98,7 @@ The Special Euclidean Group $\mathbb{SE}(3)$ is further defined~\eqref{eq:SE3def
  \in \mathbb{R}^3 \right\rbrace
 \label{eq:SE3definition}
 \end{equation}
-
+%
 An additive increment in the vector space will associate to an multiplication increment on manifold, which follows the below approximation
 \begin{equation}
 \label{eq:manifoldapprox}
@@ -113,14 +118,13 @@ exp((\mathbb{\xi}+\delta \mathbb{\xi})^{\land}) \approx exp((\mathcal{J}\delta\m
 						\end{figure}
 \vspace{1em}
 The pinhole camera model which is appropriate to most cameras is used in this work. We assume that the camera is supposed to be well-calibrated and the intrinsic parameters are precise since no optimization will be made on them.  
-
-\end{myblock}
+\end{block}
 
 
 					\begin{myblock}{References}
 						\footnotesize
 						\bibliographystyle{abbrv}
-						\bibliography{./bib}
+						\bibliography{ref}
 					\end{myblock}\vfill
 
 		}\end{minipage}\end{beamercolorbox}
@@ -129,25 +133,30 @@ The pinhole camera model which is appropriate to most cameras is used in this wo
 		\begin{beamercolorbox}[center]{postercolumn}
 			\begin{minipage}{.98\textwidth} % tweaks the width, makes a new \textwidth
 				\parbox[t][\columnheight]{\textwidth}{ % must be some better way to set the the height, width and textwidth simultaneously
-					\begin{myblock}{Methods}
+					
+\begin{myblock}{Methods}
 \vspace{1em}
 \begin{minipage}[0.3\textheight]{\textwidth}
-\begin{columns}[T]
-\begin{column}{0.5\textwidth}
-\raggedright
-\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
-\item This section details each step of the proposed method with a systematic chart shown in Fig.~\ref{fig:flowchart}.
-
-\item[$\bullet$] ArUco detector implemented in OpenCV~\cite{aurcodetector} for fiducial detection and estimate pose with the RPnP algorithm~\cite{li2012robust}. The relative pose from $i^{th}$ marker to $j^{th}$ marker, if both viewed in $k^{th}$ camera frame, can be further computed as
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\raggedright
+%\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
+%\item 
+This section details each step of the proposed method with a systematic chart shown in Fig.~\ref{fig:flowchart}.
+%
+%\item[$\bullet$] 
+ArUco detector implemented in OpenCV~\cite{aurcodetector} for fiducial detection and estimate pose with the RPnP algorithm~\cite{li2012robust}. The relative pose from $i^{th}$ marker to $j^{th}$ marker, if both viewed in $k^{th}$ camera frame, can be further computed as
 \begin{equation}
 {T_{\bold{M_i}}^{\bold{M}_j}}^{-1} = {T_{\bold{M}_j}^{\bold{M}_i}} = {T_{\bold{M}_i}^{\bold{C}_k}}^{-1}T_{\bold{M}_j}^{\bold{C}_k}
 \end{equation}
 By scanning all images collected, an initial pose graph $pg$ is incrementally established. A schematic diagram depicting the data structure of $pg$ is shown in Fig.~\ref{fig:dt_pg}.  
 
-\item[$\bullet$] The aim of pose fusion is to refine the estimation of  ${{T}_{\bold{M}_i}^{\bold{M}_j}}$ by fusing all validated measurements obtained. After pose fusion process, a refined pose graph which better represents relative transformations of markers will be created. The Gauss-Newton method is used for pose fusion.
-
-\item[$\bullet$] In order to establish optimal paths, the fused pose graph $pg_f$ is treated as an undirected graph with nodes, edges denoting markers and costs, respectively. Graph search method is used to find the origin which possess the minimum accumulated costs to all other vertices. The pose optimization is to further refine poses by minimizing per frame reprojection errors using the Levenberg–Marquardt (LM) algorithm~\cite{madsen1999methods}.
-\end{enumerate}
+%\item[$\bullet$] 
+The aim of pose fusion is to refine the estimation of  ${{T}_{\bold{M}_i}^{\bold{M}_j}}$ by fusing all validated measurements obtained. After pose fusion process, a refined pose graph which better represents relative transformations of markers will be created. The Gauss-Newton method is used for pose fusion.
+%
+%\item[$\bullet$] 
+In order to establish optimal paths, the fused pose graph $pg_f$ is treated as an undirected graph with nodes, edges denoting markers and costs, respectively. Graph search method is used to find the origin which possess the minimum accumulated costs to all other vertices. The pose optimization is to further refine poses by minimizing per frame reprojection errors using the Levenberg–Marquardt (LM) algorithm~\cite{madsen1999methods}.
+%\end{enumerate}
 \end{column}
 \begin{column}{0.5\textwidth}
 \begin{figure}
@@ -176,8 +185,9 @@ By scanning all images collected, an initial pose graph $pg$ is incrementally es
 \begin{columns}[T]
 \begin{column}{0.33\textwidth}
 \raggedright
-\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
-\item[$\bullet$] Synthetic Mapping Test: 
+%\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
+%\item[$\bullet$] 
+Synthetic Mapping Test: 
 \begin{figure}
 \centering
 \includegraphics[width=1.0\textwidth]{img/synthetic_3d_new}
@@ -190,12 +200,13 @@ By scanning all images collected, an initial pose graph $pg$ is incrementally es
 \caption{Rotation and translation error analysis. Marker $1$ is set as the origin. Consequently, its rotation and translation errors are zero. Translation errors are measured in meters.}
 \label{fig:synthetic_rt}
 \end{figure}
-\end{enumerate}
+%\end{enumerate}
 \end{column}
-
+%
 \begin{column}{0.33\textwidth}
-\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
-\item[$\bullet$] Box Test: 
+%\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
+%\item[$\bullet$] 
+Box Test: 
 \begin{figure}
 \centering
 \includegraphics[width=0.6\textwidth]{img/box_snap}
@@ -209,12 +220,13 @@ By scanning all images collected, an initial pose graph $pg$ is incrementally es
 \caption{Mapping result and error plots from "box" experiment. Marker $1$ is the origin so its erros are zero.}
 \label{fig:box_res}
 \end{figure}
-\end{enumerate}
+%\end{enumerate}
 \end{column}
 
 \begin{column}{0.33\textwidth}
-\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
-\item[$\bullet$] Pose Estimation Test: the GoPro Hero 6 is used
+%\begin{enumerate}[label=,labelindent=\parindent,leftmargin=*]
+%\item[$\bullet$] 
+Pose Estimation Test: the GoPro Hero 6 is used
 to capture images with a resolution of 2.7K (2704 × 1520).
 \begin{figure}
 \centering
@@ -226,9 +238,9 @@ to capture images with a resolution of 2.7K (2704 × 1520).
 %\includegraphics[width=4cm,height=4cm]{ls_table}
 %\caption{Snapshots of markers.}
 \end{figure}
-\end{enumerate}
+%\end{enumerate}
 \end{column}
-
+%
 \end{columns}
 \end{minipage}
 \end{myblock}\vfill
@@ -236,7 +248,8 @@ to capture images with a resolution of 2.7K (2704 × 1520).
 This work is supported by the Innovation Fund Denmark via project UAV-QMS.
 \end{myblock}\vfill
 
-		}\end{minipage}\end{beamercolorbox}
+			}\end{minipage}
+		\end{beamercolorbox}
 	\end{column}
 \end{columns}
 \end{frame}
